@@ -1,0 +1,36 @@
+// Leetcode Templet 
+
+#include <bits/stdc++.h>
+using namespace std;
+
+#define ll long long
+#define MOD (ll)(1e9 + 7)
+#define foo(i, a, b) for (int i = (a); i < (b); ++i)
+#define foop(j, c, d) for (int j = (c); j <= (d); ++j)
+#define pb push_back
+#define sz(x) ((int)(x).size())
+using vll = vector<ll>;
+using pll = pair<ll, ll>;
+
+// Adesh
+
+class Solution {
+public:
+    string reverseVowels(string s) {
+        string vowels = "";
+        for(int i = 0; i<s.size(); i++){
+            if(s[i] == 'A' || s[i] == 'E' || s[i] == 'I' || s[i] == 'O' || s[i] == 'U' || s[i] == 'a' || s[i] == 'e' || s[i] == 'i' || s[i] == 'o' || s[i] == 'u'){
+                vowels += s[i];
+                s[i] = '/';
+            }
+        }
+
+        int index = vowels.size()-1;
+        for(int i = 0; i<s.size(); i++){
+            if(s[i] == '/'){
+                s[i] = vowels[index--];
+            }
+        }
+        return s;
+    }
+};
