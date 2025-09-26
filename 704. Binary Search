@@ -1,0 +1,32 @@
+// Leetcode Templet 
+
+#include <bits/stdc++.h>
+using namespace std;
+
+#define ll long long
+#define MOD (ll)(1e9 + 7)
+#define foo(i, a, b) for (int i = (a); i < (b); ++i)
+#define foop(j, c, d) for (int j = (c); j <= (d); ++j)
+#define pb push_back
+#define sz(x) ((int)(x).size())
+using vll = vector<ll>;
+using pll = pair<ll, ll>;
+
+// Adesh
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+
+        int l = 0, r = (int)nums.size() - 1;
+        while (l <= r) {
+            int mid = l + (r - l) / 2;
+            if (nums[mid] == target)
+                return mid;
+            else if (nums[mid] < target)
+                l = mid + 1;
+            else
+                r = mid - 1;
+        }
+        return -1;
+    }
+};
