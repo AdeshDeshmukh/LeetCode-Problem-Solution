@@ -1,0 +1,45 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+
+    ListNode* prev = nullptr;
+        ListNode* curr = head;
+        while (curr != nullptr) {
+            ListNode* temp = curr->next; 
+            curr->next = prev;           
+            prev = curr;                 
+            curr = temp;               
+        }
+        return prev; 
+    }
+};
+
+
+
+
+
+
+
+/*Intuition💡:
+Iterative Approach:
+Use two pointers: prev (starts as null) and curr (starts at head).
+At each step:
+1 . Store curr.next in temp.
+2 . Reverse curr.next to point to prev.
+3 . Move prev to curr and curr to temp.
+Repeat until curr is null.
+prev becomes the new head of the reversed list.
+Visualization:
+Original list : 1 -> 2 -> 3 -> 4 -> 5 ->null
+Reversed list : 5 -> 4 -> 3 -> 2 -> 1 -> null
+*/
