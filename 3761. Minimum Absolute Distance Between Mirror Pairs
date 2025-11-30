@@ -1,0 +1,96 @@
+ // LeetCode Templet : Adesh
+
+#include <bits/stdc++.h>
+using namespace std;
+
+#define foo(i, a, b) for (int i = (a); i < (b); ++i)
+#define foop(j, c, d) for (int j = (c); j <= (d); ++j)
+#define rfoop(i, a, b) for (int i = (a) - 1; i >= (b); --i)
+#define all(x) (x).begin(), (x).end()
+#define sz(x) ((int)(x).size())
+#define pb push_back
+#define ppb pop_back
+#define mp make_pair
+#define F first
+#define S second
+#define sline(s) getline(cin, s)
+
+using ll   =  long long;
+using vll  =  vector<ll>;
+using pll  =  pair<ll, ll>;
+using vpll =  vector<pll>;
+using vi   =  vector<int>;
+using pi   =  pair<int, int>;
+using vpi  =  vector<pi>;
+using mii  =  unordered_map<int,int>;
+using mll  =  unordered_map<ll,ll>;
+
+
+const long long MOD = 1e9 + 7;
+const long long INF = 1e18;
+const double PI = 3.141592653589793238462;
+const double EPS = 1e-9;
+
+#define sorta(v) sort(all(v))
+#define sortd(v) sort(all(v), greater<>()) // C++14+
+#define rev(v) reverse(all(v))
+
+#define maxe(v) *max_element(all(v))
+#define mine(v) *min_element(all(v))
+#define sum(v) accumulate(all(v), 0LL)
+
+ll gcd(ll a, ll b) {
+    while (b) {
+        a %= b;
+        swap(a, b);
+    }
+    return a;
+}
+
+ll lcm(ll a, ll b) {
+    if (a == 0 || b == 0)
+        return 0;
+    return (a / gcd(a, b)) * b;
+}
+
+ll power(ll base, ll exp) {
+    ll res = 1;
+    base %= MOD;
+    while (exp > 0) {
+        if (exp % 2 == 1)
+            res = (res * base) % MOD;
+        base = (base * base) % MOD;
+        exp /= 2;
+    }
+    return res;
+}
+
+int reverse(int x){
+        int res = 0;
+        while(x){
+            res = res * 10 + x % 10;
+            x /= 10;
+        }
+        return res;
+    }
+
+
+
+class Solution {
+public:
+    int minMirrorPairDistance(vector<int>& nums) {
+        unordered_map<int, int> lastO;
+        lastO[reverse(nums[0])] = 0;
+
+        int res = INT_MAX;
+
+        for(int j = 1; j < nums.size(); j++){
+            if(lastO.count(nums[j])){
+                res = min(res, j - lastO[nums[j]]);
+            }
+            lastO[reverse(nums[j])] = j;
+        }
+
+        return (res == INT_MAX) ? -1 : res;
+    }
+};
