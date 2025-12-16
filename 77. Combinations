@@ -1,0 +1,22 @@
+class Solution {
+public:
+    vector<vector<int>> combine(int n, int k) {
+        vector<int> c;
+        vector<vector<int>> r;
+
+        combinations(n, k, 1, c, r);
+        return r;
+    }
+
+    void combinations(int n, int k, int start, vector<int>& c,vector<vector<int>>& r) {
+        if (c.size() == k) {
+            r.push_back(c);
+            return;
+        }
+        for (int i = start; i <= n; i++) {
+            c.push_back(i);
+            combinations(n, k, i + 1, c, r);
+            c.pop_back();
+        }
+    }
+};
