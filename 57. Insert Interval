@@ -1,0 +1,30 @@
+// Contest LC
+using ll   =  long long;
+using vll  =  vector<ll>;
+#define pb push_back
+#define sorta(v) sort((v).begin(), (v).end())
+#define foo(i, a, b) for (int i = (a); i < (b); ++i
+
+
+class Solution {
+public:
+    vector<vector<int>> insert(vector<vector<int>>& it, vector<int>& ni) 
+    {
+        vector<vector<int>> re;
+        
+        for (size_t i = 0; i < it.size(); i++){
+            if (it[i][1] < ni[0])re.pb(it[i]);
+            else if (it[i][0] > ni[1]){
+                re.pb(ni);
+                ni = it[i]; 
+            }
+            else if(it[i][1] >= ni[0] || it[i][0] <= ni[1]){
+                ni[0] = min(it[i][0], ni[0]);
+                ni[1] = max(ni[1], it[i][1]);
+
+            }
+        }
+        re.pb(ni); 
+        return re;
+    }
+};
