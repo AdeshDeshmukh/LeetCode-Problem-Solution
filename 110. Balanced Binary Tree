@@ -1,0 +1,40 @@
+// Contest LC
+using ll   =  long long;
+using vll  =  vector<ll>;
+#define pb push_back
+#define sorta(v) sort((v).begin(), (v).end())
+#define foo(i, a, b) for (int i = (a); i < (b); ++i
+
+
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    bool isBalanced(TreeNode* root) {
+        return check(root) != -1;
+    }
+
+    int check(TreeNode* r) {
+        if (r == NULL) return 0;
+
+        int lh = check(r->left);
+        if (lh == -1) return -1;
+
+        int rh = check(r->right);
+        if (rh == -1) return -1;
+
+        if (abs(lh - rh) > 1) return -1;
+
+        return 1 + max(lh, rh);
+    }
+};
