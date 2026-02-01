@@ -1,0 +1,22 @@
+// Contest LC
+using ll   =  long long;
+using vi  =  vector<int>;
+using vll  =  vector<ll>;
+#define pb push_back
+#define sorta(v) sort((v).begin(), (v).end())
+#define foo(i, a, b) for (int i = (a); i < (b); ++i )
+
+
+class Solution {
+public:
+    int countMonobit(int n) {
+        if(n == 0 ) return 1 ;
+        int k = 0 , v = 1 ;
+        while(v-1 <= n){
+        k++; 
+            v<<=1 ;
+        }
+
+        return k ;
+    }
+};
