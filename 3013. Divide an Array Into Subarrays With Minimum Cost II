@@ -1,0 +1,54 @@
+// Contest LC
+using ll   =  long long;
+using vi  =  vector<int>;
+using vll  =  vector<ll>;
+#define pb push_back
+#define sorta(v) sort((v).begin(), (v).end())
+#define foo(i, a, b) for (int i = (a); i < (b); ++i )
+
+
+class Solution {
+public:
+    long long minimumCost(vector<int>& nums, int k, int dist) {
+        multiset<int> se, re;
+        long long ss = LLONG_MAX, sos = 0;
+
+        for (int i = 1, j = 1; j < nums.size(); j++) {
+            se.insert(nums[j]);
+            sos += nums[j];
+
+            if (se.size() >= k) {
+                int largest = *prev(se.end());
+                se.erase(prev(se.end()));
+                sos -= largest;
+                re.insert(largest);
+            }
+
+            if (i + dist == j) {
+                ss = min(ss, sos);
+
+                auto it = se.find(nums[i]);
+                if (it != se.end()) {
+                    sos -= *it;
+                    se.erase(it);
+
+                    if (!re.empty()) {
+                        int fo = *re.begin();
+                        re.erase(re.begin());
+                        se.insert(fo);
+                        sos += fo;
+                    }
+                } 
+                else {
+                    it = re.find(nums[i]);
+                    if (it != re.end())
+                        re.erase(it);
+                }
+
+                i++;
+            }
+        }
+
+        return nums[0] + ss;
+    }
+};
