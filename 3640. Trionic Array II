@@ -1,0 +1,56 @@
+// Contest LC
+using ll   =  long long;
+using vi  =  vector<int>;
+using vll  =  vector<ll>;
+#define pb push_back
+#define sorta(v) sort((v).begin(), (v).end())
+#define foo(i, a, b) for (int i = (a); i < (b); ++i )
+
+
+class Solution {
+public:
+    ll maxSumTrionic(vector<int>& n) {
+
+        int nn = n.size();
+        ll res = -1e16;
+
+        for (int i = 1; i < nn - 2; i++) {
+
+            int a = i, b = i;
+            ll net = n[a];
+
+            while (b + 1 < nn && n[b + 1] < n[b]) {
+                net += n[b + 1];
+                b++;
+            }
+
+            if (a == b) continue;
+
+            int c = b;
+
+            ll left = 0, right = 0;
+            ll lx = LLONG_MIN, rx = LLONG_MIN;
+
+            while (a - 1 >= 0 && n[a - 1] < n[a]) {
+                left += n[a - 1];
+                lx = max(lx, left);
+                a--;
+            }
+
+            if (a == i) continue;
+
+            while (b + 1 < nn && n[b + 1] > n[b]) {
+                right += n[b + 1];
+                rx = max(rx, right);
+                b++;
+            }
+
+            if (b == c) continue;
+
+            i = b - 1;
+            res = max(res, lx + net + rx);
+        }
+
+        return res;
+    }
+};
