@@ -1,0 +1,25 @@
+// Contest LC
+using ll   =  long long;
+using vi  =  vector<int>;
+using vll  =  vector<ll>;
+#define pb push_back
+#define sorta(v) sort((v).begin(), (v).end())
+#define foo(i, a, b) for (int i = (a); i < (b); ++i )
+
+
+class Solution {
+public:
+    int dominantIndices(vector<int>& n) {
+        ll nn = n.size() , c = 0 , t= 0;
+        for(auto x : n) t+= x ;
+        ll p = 0 ;
+        foo(i,0,nn-1){
+            p += n[i] ;
+            ll re = t -p ;
+            ll rc = nn -i-1 ;
+
+            if((ll)n[i]*rc > re) c++ ;
+            
+        }return c ;
+    }
+};
