@@ -1,0 +1,44 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+
+ 
+// Contest LC
+using ll   =  long long;
+using vi  =  vector<int>;
+using vll  =  vector<ll>;
+#define pb push_back
+#define sorta(v) sort((v).begin(), (v).end())
+#define foo(i, a, b) for (int i = (a); i < (b); ++i )
+
+
+class Solution {
+    vector<TreeNode*>inOrder;
+    void inOrderTree(TreeNode* r){
+        if(!r)return;
+        inOrderTree(r->left);
+        inOrder.push_back(r);
+        inOrderTree(r->right);
+    }
+    TreeNode* balanced(int start,int end){
+        if(start>end)return NULL;
+        int mid=(start+end)/2;
+        TreeNode* r=inOrder[mid];
+        r->left=balanced(start,mid-1);
+        r->right=balanced(mid+1,end);
+        return r;
+    }
+public:
+    TreeNode* balanceBST(TreeNode* r) {
+        inOrderTree(r);
+        return balanced(0,inOrder.size()-1);
+    }
+};
