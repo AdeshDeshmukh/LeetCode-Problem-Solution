@@ -1,0 +1,86 @@
+// Contest LC
+using ll   =  long long;
+using vi  =  vector<int>;
+using vll  =  vector<ll>;
+#define pb push_back
+#define sorta(v) sort((v).begin(), (v).end())
+#define foo(i, a, b) for (int i = (a); i < (b); ++i )
+
+class SegmentTree {
+public:
+    int n;
+    vi mit, mxt, lazy;
+
+    SegmentTree(int size) {
+        n = size;
+        mit.assign(4 * n, 0);
+        mxt.assign(4 * n, 0);
+        lazy.assign(4 * n, 0);
+    }
+
+    void push(int node, int start, int end) {
+        if (lazy[node] != 0) {
+            mit[node] += lazy[node];
+            mxt[node] += lazy[node];
+            if (start != end) {
+                lazy[2*node] += lazy[node];
+                lazy[2*node+1] += lazy[node];
+            }
+            lazy[node] = 0;
+        }
+    }
+
+    void ur(int node, int start, int end, int l, int r, int val) {
+        push(node, start, end);
+        if (start > end || start > r || end < l)
+            return;
+        if (l <= start && end <= r) {
+            lazy[node] += val;
+            push(node, start, end);
+            return;
+        }
+        int mid = (start + end) / 2;
+        ur(2*node, start, mid, l, r, val);
+        ur(2*node+1, mid+1, end, l, r, val);
+        mit[node] = min(mit[2*node], mit[2*node+1]);
+        mxt[node] = max(mxt[2*node], mxt[2*node+1]);
+    }
+
+    int find_leftmost_zero(int node, int start, int end) {
+        push(node, start, end);
+        if (mit[node] > 0 || mxt[node] < 0)
+            return -1;
+        if (start == end)
+            return mit[node] == 0 ? start : -1;
+        int mid = (start + end) / 2;
+        int left = find_leftmost_zero(2*node, start, mid);
+        if (left != -1)
+            return left;
+        return find_leftmost_zero(2*node+1, mid+1, end);
+    }
+};
+
+class Solution {
+public:
+    int longestBalanced(vector<int>& nums) {
+        int n = nums.size();
+        unordered_map<int,int> prev;
+        SegmentTree st(n);
+        int re = 0;
+
+        for (int r = 0; r < n; r++) {
+            int v = nums[r];
+            int val = (v % 2 == 0) ? 1 : -1;
+
+            if (prev.count(v))
+                st.ur(1, 0, n-1, 0, prev[v], -val);
+
+            st.ur(1, 0, n-1, 0, r, val);
+            prev[v] = r;
+
+            int l = st.find_leftmost_zero(1, 0, n-1);
+            if (l != -1 && l <= r)
+                re = max(re, r - l + 1);
+        }return re;
+    }
+};
