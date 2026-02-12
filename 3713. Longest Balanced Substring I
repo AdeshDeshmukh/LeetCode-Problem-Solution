@@ -1,0 +1,29 @@
+// Contest LC
+using ll   =  long long;
+using vi  =  vector<int>;
+using vll  =  vector<ll>;
+#define pb push_back
+#define sorta(v) sort((v).begin(), (v).end())
+#define foo(i, a, b) for (int i = (a); i < (b); ++i )
+
+
+class Solution {
+public:
+    int longestBalanced(string s) {
+        ll n = s.size(), ans = 1;  
+        foo(i,0,n){
+            vector<ll> f(26, 0);
+            ll d = 0;
+            ll mf = 0;
+            foo(j,i,n) {
+                ll idx = s[j] - 'a';
+                if (f[idx] == 0) d++;
+                f[idx]++;
+                mf = max(mf, f[idx]);
+                ll len = j - i + 1;
+                if (len == d * mf) ans = max(ans, len);
+            }
+        }
+        return ans;
+    }
+};
