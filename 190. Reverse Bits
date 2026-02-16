@@ -1,0 +1,20 @@
+// Contest LC
+using ll   =  long long;
+using vi  =  vector<int>;
+using vll  =  vector<ll>;
+#define pb push_back
+#define sorta(v) sort((v).begin(), (v).end())
+#define foo(i, a, b) for (int i = (a); i < (b); ++i )
+
+
+class Solution {
+public:
+    int reverseBits(int n) {
+        ll re = 0;
+        foo(i,0,32){
+            re <<= 1;
+            re |= (n & 1);
+            n >>= 1;
+        }return re;
+    }
+};
