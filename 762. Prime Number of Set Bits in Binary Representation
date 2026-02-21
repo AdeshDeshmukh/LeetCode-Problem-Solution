@@ -1,0 +1,24 @@
+// Contest LC
+using ll   =  long long;
+using vi  =  vector<int>;
+using vll  =  vector<ll>;
+#define pb push_back
+#define sorta(v) sort((v).begin(), (v).end())
+#define foo(i, a, b) for (int i = (a); i < (b); ++i )
+
+
+class Solution {
+public:
+    int countPrimeSetBits(int l, int r) {
+        vi primes = {2,3,5,7,11,13,17,19,23,29,31};
+        unordered_map<int,int> isPrime;
+
+        for(int i: primes)isPrime[i]=1;
+        int count =0;
+        for(int i=l;i<=r;i++){
+            int setBits = __builtin_popcount(i);
+            if(isPrime.count(setBits))count++;
+        }return count;
+
+    }
+};
