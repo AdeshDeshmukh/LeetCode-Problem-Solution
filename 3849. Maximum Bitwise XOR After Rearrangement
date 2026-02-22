@@ -1,0 +1,39 @@
+// Contest LC
+using ll   =  long long;
+using vi  =  vector<int>;
+using vll  =  vector<ll>;
+#define pb push_back
+#define sorta(v) sort((v).begin(), (v).end())
+#define foo(i, a, b) for (int i = (a); i < (b); ++i )
+
+
+class Solution {
+public:
+    string maximumXor(string s, string t) {
+        ll o = count(t.begin(),t.end(), '1');
+        ll z= t.size()-o ;
+        string re ="" ;
+        for(auto c:s){
+            if(c=='0') {
+                if(o>0) {
+                    re+= '1' ;
+                    o-- ;
+                }
+                else {
+                re += '0' ; 
+                    z-- ;
+                }
+            }
+            else{
+                if(z>0) {
+                    re += '1' ;
+                    z-- ;
+                }
+                else {
+                    re += '0' ; 
+                    o-- ;
+                }
+            }
+        }return re ;
+    }
+};
