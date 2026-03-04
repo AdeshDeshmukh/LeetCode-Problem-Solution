@@ -1,0 +1,35 @@
+// Contest LC
+using ll   =  long long;
+using vi  =  vector<int>;
+using vll  =  vector<ll>;
+#define pb push_back
+#define sorta(v) sort((v).begin(), (v).end())
+#define foo(i, a, b) for (int i = (a); i < (b); ++i )
+
+
+class Solution {
+public:
+    int numSpecial(vector<vector<int>>& mm) {
+        int m = mm.size();
+        int n = mm[0].size();
+        vi rc(m, 0);
+        vi cc(n, 0);
+        
+        foo(i,0,m){
+            foo(j,0,n){
+                if(mm[i][j] == 1){
+                    rc[i]++;
+                    cc[j]++;
+                }
+            }
+        }
+        
+        int re = 0;
+        foo(i,0,m){
+            foo(j,0,n){
+                if(mm[i][j] == 1 && rc[i] == 1 && cc[j] == 1)re++;
+            }
+        }
+        return re;
+    }
+};
