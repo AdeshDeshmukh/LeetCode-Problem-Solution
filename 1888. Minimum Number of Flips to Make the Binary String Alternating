@@ -1,0 +1,39 @@
+// Contest LC
+using ll   =  long long;
+using vi  =  vector<int>;
+using vll  =  vector<ll>;
+#define pb push_back
+#define sorta(v) sort((v).begin(), (v).end())
+#define foo(i, a, b) for (int i = (a); i < (b); ++i )
+
+
+
+class Solution {
+public:
+    int minFlips(string s) {
+        ll n = s.size();
+        ll re = INT_MAX, f1 = 0, f2 = 0, i = 0, j = 0;
+
+        while (j < 2 * n) {
+            char t1 = (j % 2 ? '0' : '1');
+            char t2 = (j % 2 ? '1' : '0');
+
+            if (s[j % n] != t1) f1++;
+            if (s[j % n] != t2) f2++;
+
+            if (j - i + 1 > n) {
+                char t1r = (i % 2 ? '0' : '1');
+                char t2r = (i % 2 ? '1' : '0');
+
+                if (s[i % n] != t1r) f1--;
+                if (s[i % n] != t2r) f2--;
+                i++;
+            }
+
+            if (j - i + 1 == n) re = min({f1, f2, re});
+            
+            j++;
+        }
+        return re;
+    }
+};
