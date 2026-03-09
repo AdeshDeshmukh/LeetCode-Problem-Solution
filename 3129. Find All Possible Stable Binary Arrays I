@@ -1,0 +1,30 @@
+// Contest LC
+using ll   =  long long;
+using vi  =  vector<int>;
+using vll  =  vector<ll>;
+#define pb push_back
+#define sorta(v) sort((v).begin(), (v).end())
+#define foo(i, a, b) for (int i = (a); i < (b); ++i )
+
+
+class Solution {
+public:
+    int numberOfStableArrays(int z, int o, int l) {
+        const int MOD = 1e9+7;
+        vector<vector<array<long,2>>> dp(
+            z+1, vector<array<long,2>>(o+1,{0,0}));
+
+        for(int i=1;i<=min(z,l);i++) dp[i][0][0]=1;
+        for(int j=1;j<=min(o,l);j++) dp[0][j][1]=1;
+        for(int i=1;i<=z;i++){
+            for(int j=1;j<=o;j++){
+                long over0 = (i-l>=1)? dp[i-l-1][j][1]:0;
+                long over1 = (j-l>=1)? dp[i][j-l-1][0]:0;
+
+                dp[i][j][0]=(dp[i-1][j][0]+dp[i-1][j][1]-over0+MOD)%MOD;
+                dp[i][j][1]=(dp[i][j-1][0]+dp[i][j-1][1]-over1+MOD)%MOD;
+            }
+        }
+        return (dp[z][o][0]+dp[z][o][1])%MOD;
+    }
+};
