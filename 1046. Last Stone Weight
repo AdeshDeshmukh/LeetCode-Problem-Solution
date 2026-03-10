@@ -1,0 +1,26 @@
+// Contest LC
+using ll   =  long long;
+using vi  =  vector<int>;
+using vll  =  vector<ll>;
+#define pb push_back
+#define sorta(v) sort((v).begin(), (v).end())
+#define foo(i, a, b) for (int i = (a); i < (b); ++i )
+
+
+class Solution {
+public:
+    int lastStoneWeight(vector<int>& s) {
+        priority_queue<int> p;
+        for(auto x : s) p.push(x);
+        while(p.size()>1){
+            int a = p.top();
+            p.pop();
+            int b = p.top();
+            p.pop();
+
+            if(a == b) p.push(0);
+            else p.push(abs(a-b));
+        }
+        return p.top();
+    }
+};
