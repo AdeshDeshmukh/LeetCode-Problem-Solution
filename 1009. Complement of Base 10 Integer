@@ -1,0 +1,23 @@
+// Contest LC
+using ll   =  long long;
+using vi  =  vector<int>;
+using vll  =  vector<ll>;
+#define pb push_back
+#define sorta(v) sort((v).begin(), (v).end())
+#define foo(i, a, b) for (int i = (a); i < (b); ++i )
+
+
+class Solution {
+public:
+    int bitwiseComplement(int n) {
+        if(n==0) return 1;
+        int bm = 0 , t = n;
+        while(t){
+            bm<<=1;
+            bm |= 1; 
+            t>>=1;
+        }
+        return bm ^ n;
+        
+    }
+};
