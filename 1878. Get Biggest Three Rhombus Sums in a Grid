@@ -1,0 +1,47 @@
+// Contest LC
+using ll   =  long long;
+using vi  =  vector<int>;
+using vll  =  vector<ll>;
+#define pb push_back
+#define sorta(v) sort((v).begin(), (v).end())
+#define foo(i, a, b) for (int i = (a); i < (b); ++i )
+
+// For ref adesh : https://www.youtube.com/watch?v=37IXS3SiI8c
+
+
+class Solution {
+public:
+    vector<int> getBiggestThree(vector<vector<int>>& grid) {
+        ll m = grid.size();
+        ll n = grid[0].size();
+        set<ll> st;
+        auto addToSet = [&](ll val) {
+            st.insert(val);
+            if (st.size() > 3)
+                st.erase(begin(st));
+        };
+
+        for (ll r = 0; r < m; r++) {
+            for (int c = 0; c < n; c++) {
+
+                addToSet(grid[r][c]);  
+
+                for (int side = 1; r-side >= 0 && r+side < m && c-side >= 0 && c+side < n; side++) {
+
+                    int sum = 0;
+
+                    foo(k,0,side) {
+                        sum += grid[r - side + k][c + k];  
+                        sum += grid[r + k][c + side - k];   
+                        sum += grid[r + side - k][c - k];  
+                        sum += grid[r - k][c - side + k];  
+                    }
+
+                    addToSet(sum);
+                }
+            }
+        }
+
+        return vector<int>(rbegin(st), rend(st));
+    }
+};
