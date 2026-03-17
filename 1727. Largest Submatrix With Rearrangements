@@ -1,0 +1,28 @@
+// Contest LC
+using ll   =  long long;
+using vi  =  vector<int>;
+using vll  =  vector<ll>;
+#define pb push_back
+#define sorta(v) sort((v).begin(), (v).end())
+#define foo(i, a, b) for (int i = (a); i < (b); ++i )
+
+
+class Solution {
+public:
+    int largestSubmatrix(vector<vector<int>>& matrix) {
+        if (matrix.empty()) return 0;
+
+        ll m = matrix.size() , n = matrix[0].size();
+        vi h(n, 0);
+        int ma = 0;
+        for (auto& row : matrix) {
+            for (int j = 0; j < n; j++)
+                h[j] = row[j] ? h[j] + 1 : 0;
+
+            vi ss = h;
+            sort(ss.begin(), ss.end(), greater<int>());
+            for (int j = 0; j < n; j++)
+                ma = max(ma, ss[j] * (j + 1));
+        }return ma;
+    }
+};
