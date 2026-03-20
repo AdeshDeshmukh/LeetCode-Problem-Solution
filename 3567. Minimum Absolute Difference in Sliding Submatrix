@@ -1,0 +1,47 @@
+// Contest LC
+using ll   =  long long;
+using vi  =  vector<int>;
+using vll  =  vector<ll>;
+#define pb push_back
+#define sorta(v) sort((v).begin(), (v).end())
+#define foo(i, a, b) for (int i = (a); i <= (b); ++i )
+
+
+class Solution {
+public:
+    vector<vector<int>> minAbsDiff(vector<vector<int>>& g, int k) {
+        
+        ll m = g.size(), n = g[0].size();
+
+        vector<vector<int>> res(m-k+1,vi (n-k+1));
+
+        foo(i,0,m-k){
+            foo(j,0,n-k){
+                set<int> v;
+                foo(a,i,i+k-1){
+                    foo(b,j,j+k-1){
+                        v.insert(g[a][b]) ;
+
+                    }
+                }
+                if (v.size() == 1) {
+                    continue;
+                }
+                int minAbsDiff = INT_MAX;
+                auto prev = v.begin();
+                auto curr = next(prev);
+                
+                while (curr != v.end()) {
+                    minAbsDiff = min(minAbsDiff, *curr - *prev);
+                    prev = curr;
+                    curr++;
+                }
+                res[i][j] = minAbsDiff;
+
+            }
+        }
+        return res;
+
+
+    }
+};3567. Minimum Absolute Difference in Sliding Submatrix
