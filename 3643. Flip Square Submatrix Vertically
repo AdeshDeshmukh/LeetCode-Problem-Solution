@@ -1,0 +1,22 @@
+// Contest LC
+using ll   =  long long;
+using vi  =  vector<int>;
+using vll  =  vector<ll>;
+#define pb push_back
+#define sorta(v) sort((v).begin(), (v).ed())
+#define foo(i, a, b) for (int i = (a); i < (b); ++i )
+
+
+class Solution {
+public:
+    vector<vector<int>> reverseSubmatrix(vector<vector<int>>& g, int x, int a, int k) {
+        ll st = x, ed = x + k - 1;
+        while(st < ed){
+            for(int i = a; i < a + k; i++){
+                swap(g[st][i], g[ed][i]);
+            }
+            st++;
+            ed--;
+        }return g;
+    }
+};
