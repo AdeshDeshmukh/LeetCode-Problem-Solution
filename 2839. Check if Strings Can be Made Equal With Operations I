@@ -1,0 +1,17 @@
+// Contest LC
+using ll   =  long long;
+using vi  =  vector<int>;
+using vll  =  vector<ll>;
+#define pb push_back
+#define sorta(v) sort((v).begin(), (v).end())
+#define foo(i, a, b) for (int i = (a); i < (b); ++i )
+
+
+class Solution {
+public:
+    bool canBeEqual(string s1, string s2) {
+        if(s1[0] != s2[0]) swap(s1[0], s1[2]);
+        if(s1[1] != s2[1]) swap(s1[1], s1[3]);
+        return s1 == s2;
+    }
+};
