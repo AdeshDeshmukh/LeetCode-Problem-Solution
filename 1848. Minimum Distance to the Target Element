@@ -1,0 +1,19 @@
+// Contest LC
+using ll   =  long long;
+using vi  =  vector<int>;
+using vll  =  vector<ll>;
+#define pb push_back
+#define sorta(v) sort((v).begin(), (v).end())
+#define foo(i, a, b) for (int i = (a); i < (b); ++i )
+
+
+class Solution {
+public:
+    int getMinDistance(vector<int>& n, int t, int s) {
+    int re = n.size();
+        foo(i,0,n.size()){
+            if(n[i]==t) re = min(re,abs(i-s));
+        }
+        return re;
+    }
+};
