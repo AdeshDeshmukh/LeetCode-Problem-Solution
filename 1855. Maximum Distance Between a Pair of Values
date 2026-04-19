@@ -1,0 +1,23 @@
+// Contest LC
+using ll   =  long long;
+using vi  =  vector<int>;
+using vll  =  vector<ll>;
+#define pb push_back
+#define sorta(v) sort((v).begin(), (v).end())
+#define foo(i, a, b) for (int i = (a); i < (b); ++i )
+
+
+class Solution {
+public:
+    int maxDistance(vector<int>& n1, vector<int>& n2) {
+        ll i = 0, j = 0, re = 0;
+        while(i < n1.size() && j < n2.size()){
+            if(n1[i] > n2[j])i++;
+            else{
+                re = max(re,j-i);
+                j++;
+            }
+        }
+        return re;
+    }
+};
