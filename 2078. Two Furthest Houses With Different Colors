@@ -1,0 +1,19 @@
+// Contest LC
+using ll   =  long long;
+using vi  =  vector<int>;
+using vll  =  vector<ll>;
+#define pb push_back
+#define sorta(v) sort((v).begin(), (v).end())
+#define foo(i, a, b) for (int i = (a); i < (b); ++i )
+
+
+class Solution {
+public:
+    int maxDistance(vector<int>& cc) {
+        ll n = cc.size();
+        ll l = 0, r = n-1;
+        while(l < n && cc[l] == cc[n-1]) l++;
+        while(r >= 0 && cc[r] == cc[0]) r--;
+        return max(n-l-1, r);
+    }
+};
