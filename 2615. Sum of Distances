@@ -1,0 +1,30 @@
+// Contest LC
+using ll   =  long long;
+using vi  =  vector<int>;
+using vll  =  vector<ll>;
+#define pb push_back
+#define sorta(v) sort((v).begin(), (v).end())
+#define foo(i, a, b) for (int i = (a); i < (b); ++i )
+
+
+class Solution {
+public:
+    vector<long long> distance(vector<int>& a) {
+        unordered_map<int, long long>mp, pre, suf, cnt;
+        for(auto u: a)mp[u]++;
+        int n = a.size();
+        
+        for(int i=0; i<n; i++){
+          suf[a[i]] += i;
+        }
+        vector<long long>ans(n);
+        for(int i=0; i<n ; i++){
+            suf[a[i]] -= i;
+            ans[i] = abs( cnt[a[i]] * i - pre[a[i]]) + abs((mp[a[i]] - cnt[a[i]] -1 ) * i - suf[a[i]]);
+            pre[a[i]] += i;
+            cnt[a[i]]++;
+        }
+
+        return ans;
+    }
+};
