@@ -1,0 +1,46 @@
+// Contest LC
+using ll   =  long long;
+using vi  =  vector<int>;
+using vll  =  vector<ll>;
+#define pb push_back
+#define sorta(v) sort((v).begin(), (v).end())
+#define foo(i, a, b) for (int i = (a); i < (b); ++i )
+
+
+class Solution {
+public:
+    vi p;
+
+    int find(int x) {
+        if (p[x] == x) return x;
+        return p[x] = find(p[x]);
+    }
+
+    bool unionSet(int a, int b) {
+        int pa = find(a);
+        int pb = find(b);
+        if (pa == pb) return true; 
+        p[pa] = pb;
+        return false;
+    }
+
+    bool containsCycle(vector<vector<char>>& g) {
+        int n = g.size(), m = g[0].size();
+        p.resize(n * m);
+
+        for (int i = 0; i < n * m; i++) p[i] = i;
+
+        foo(i,0,n) {
+            foo(j,0,m) {
+                int id = i * m + j;
+                if (j + 1 < m && g[i][j] == g[i][j + 1]) {
+                    if (unionSet(id, i * m + (j + 1))) return true;
+                }  
+                if (i + 1 < n && g[i][j] == g[i + 1][j]) {
+                    if (unionSet(id, (i + 1) * m + j)) return true;
+                }
+            }
+        }
+        return false;
+    }
+};
