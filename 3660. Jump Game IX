@@ -1,0 +1,31 @@
+// Contest LC
+using ll   =  long long;
+using vi  =  vector<int>;
+using vll  =  vector<ll>;
+#define pb push_back
+#define sorta(v) sort((v).begin(), (v).end())
+#define foo(i, a, b) for (int i = (a); i < (b); ++i )
+
+
+class Solution {
+public:
+    vector<int> maxValue(vector<int>& n) {
+        int nn=n.size();
+        vi mxp(nn),mns(nn);
+        mxp[0]=n[0];
+        mns[nn-1]=n[nn-1];
+        for(int i=1;i<nn;i++){
+            mxp[i]=max(n[i],mxp[i-1]);
+        }
+        for(int i=nn-2;i>=0;i--){
+            mns[i]=min(n[i],mns[i+1]);
+        }
+        vi re(nn);
+        re[nn-1]=mxp[nn-1];
+        for(int i=nn-2;i>=0;i--){
+            if(mxp[i]>mns[i+1]) re[i]=re[i+1];
+            else re[i]=mxp[i];
+        }
+        return re;
+    }
+};
