@@ -1,0 +1,42 @@
+// Contest LC
+using ll   =  long long;
+using vi  =  vector<int>;
+using vll  =  vector<ll>;
+#define pb push_back
+#define sorta(v) sort((v).begin(), (v).end())
+#define foo(i, a, b) for (int i = (a); i < (b); ++i )
+
+
+class Solution {
+public:
+    vector<vector<int>> rotateGrid(vector<vector<int>>& g, int k) {
+        int m = g.size(), n = g[0].size();
+
+        int ly = 0;
+        int s1 = 0, e1 = m - 1, s2 = 0, e2 = n - 1;
+        while(ly < min(n,m)/2)
+        {
+            vi layer;
+            for(int i = s2; i <= e2; i++) layer.pb(g[s1][i]);
+            for(int i = s1 + 1; i <= e1; i++) layer.pb(g[i][e2]);
+            for(int i = e2 - 1; i >= s2; i--) layer.pb(g[e1][i]);
+            for(int i = e1 - 1; i > s1; i--) layer.pb(g[i][s2]);
+
+            int nk = k % layer.size();
+            for(int i = 0; i < nk; i++)
+            {
+                layer.pb(layer[i]);
+            }
+
+            int idx = nk;
+            for(int i = s2; i <= e2; i++) g[s1][i] = layer[idx++];
+            for(int i = s1 + 1; i <= e1; i++) g[i][e2] = layer[idx++];
+            for(int i = e2 - 1; i >= s2; i--) g[e1][i] = layer[idx++];
+            for(int i = e1 - 1; i > s1; i--) g[i][s2] = layer[idx++];
+
+            ly++, s1++, s2++, e1--, e2--;
+        }
+
+        return g;
+    }
+};
