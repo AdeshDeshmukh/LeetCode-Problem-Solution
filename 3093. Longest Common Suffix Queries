@@ -1,0 +1,66 @@
+type TrieNode struct {
+	Val   int
+	Child map[rune]*TrieNode
+}
+
+func NewTrieNode(val int) *TrieNode {
+	return &TrieNode{
+		Val:   val,
+		Child: make(map[rune]*TrieNode),
+	}
+}
+
+func reverseString(s string) string {
+	runes := []rune(s)
+	for i, j := 0, len(runes) - 1; i < j; i, j = i + 1, j - 1 {
+		runes[i], runes[j] = runes[j], runes[i]
+	}
+	return string(runes)
+}
+
+func stringIndices(wordsContainer []string, wordsQuery []string) []int {
+    for i := range wordsContainer {
+		wordsContainer[i] = reverseString(wordsContainer[i])
+	}
+	for i := range wordsQuery {
+		wordsQuery[i] = reverseString(wordsQuery[i])
+	}
+
+    n := len(wordsContainer)
+
+    id := make([]int, n)
+	for i := 0; i < n; i++ {
+		id[i] = i
+	}
+
+    sort.SliceStable(id, func(i, j int) bool {
+		return len(wordsContainer[id[i]]) < len(wordsContainer[id[j]])
+	})
+
+    head := NewTrieNode(id[0])
+	for _, i := range id {
+		s := wordsContainer[i]
+		cur := head
+		for _, c := range s {
+			if cur.Child[c] == nil {
+				cur.Child[c] = NewTrieNode(i)
+			}
+			cur = cur.Child[c]
+		}
+	}
+
+    m := len(wordsQuery)
+	res := make([]int, m)
+	for i, s := range wordsQuery {
+		cur := head
+		for _, c := range s {
+			if cur.Child[c] == nil {
+				break
+			}
+			cur = cur.Child[c]
+		}
+		res[i] = cur.Val
+	}
+
+	return res
+}
