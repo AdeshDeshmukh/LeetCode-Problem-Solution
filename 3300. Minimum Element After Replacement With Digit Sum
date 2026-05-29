@@ -1,0 +1,26 @@
+// Contest LC
+using ll   =  long long;
+using vi  =  vector<int>;
+using vll  =  vector<ll>;
+#define pb push_back
+#define sorta(v) sort((v).begin(), (v).end())
+#define foo(i, a, b) for (int i = (a); i < (b); ++i )
+
+
+class Solution {
+public:
+    int minElement(vector<int>& n) {
+        int re = INT_MAX;
+
+        for(int i : n){
+            int s = 0;
+            while(i){
+                s += i%10;
+                i /= 10;
+            }
+            re = min(re, s);
+        }
+
+        return re;
+    }
+};
