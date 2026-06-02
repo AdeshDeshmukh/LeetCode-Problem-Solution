@@ -1,0 +1,33 @@
+// Contest LC
+using ll   =  long long;
+using vi  =  vector<int>;
+using vll  =  vector<ll>;
+#define pb push_back
+#define sorta(v) sort((v).begin(), (v).end())
+#define foo(i, a, b) for (int i = (a); i < (b); ++i )
+
+
+class Solution {
+public:
+    int earliestFinishTime(vector<int>& a, vector<int>& b, vector<int>& c, vector<int>& d) {
+        int ans = INT_MAX , n = a.size() , minEnd = INT_MAX;
+        foo(i,0,n) {
+            minEnd = min(minEnd, a[i] + b[i]);
+        }
+        int m = c.size();
+
+        foo(i,0,m) {
+            ans = min(ans, d[i] + max(minEnd, c[i]));
+        }
+        minEnd = INT_MAX;
+        foo(i,0,m) {
+            minEnd = min(minEnd, c[i] + d[i]);
+        }
+
+        foo(i,0,n) {
+            ans = min(ans, b[i] + max(minEnd, a[i]));
+        }
+
+        return ans;
+    }
+};
