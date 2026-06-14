@@ -1,0 +1,38 @@
+// Contest LC
+using ll   =  long long;
+using vi  =  vector<int>;
+using vll  =  vector<ll>;
+#define pb push_back
+#define sorta(v) sort((v).begin(), (v).end())
+#define foo(i, a, b) for (int i = (a); i < (b); ++i )
+
+
+class Solution {
+public:
+    int getLength(vector<int>& n) {
+
+        int nn=n.size() ,ans=1,id=0;
+        unordered_map<ll,ll>mp;
+        vi a(nn);
+        foo(i,0,nn){
+            if(!mp.count(n[i])) mp[n[i]] =id++;
+            a[i]=mp[n[i]] ;
+        }
+        foo(i,0,nn){
+            if (nn-1<= ans) break ;
+
+            int f[3000]={0}, fc[3001]={0} , d=0,m=0;
+            foo(j,i,nn){
+                int v= a[j];
+                if(f[v])  fc[f[v]]--;
+                else d++ ;
+
+                f[v]++; fc[f[v]]++;
+                m = max(m,f[v]) ;
+                if(d==1 || m%2 == 0 && fc[m]+fc[m/2]==d && fc[m/2] >0) ans = max(ans , j-i+1) ;
+                
+            }
+        }
+        return ans ;
+    }
+};
