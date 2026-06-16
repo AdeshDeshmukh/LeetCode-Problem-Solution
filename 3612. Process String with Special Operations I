@@ -1,0 +1,26 @@
+// Contest LC
+using ll   =  long long;
+using vi  =  vector<int>;
+using vll  =  vector<ll>;
+#define pb push_back
+#define sorta(v) sort((v).begin(), (v).end())
+#define foo(i, a, b) for (int i = (a); i < (b); ++i )
+
+
+class Solution {
+public:
+    string processStr(string s) {
+        string r;
+
+        for (char ch : s) {
+            if (islower(ch)) r.pb(ch);
+            else if (ch == '*') {
+                if (!r.empty()) r.pop_back()   ; 
+            } 
+            else if (ch == '#') r = r +r; 
+            else if (ch == '%') reverse(r.begin(), r.end());    
+        }
+
+        return r;           
+    }
+};
