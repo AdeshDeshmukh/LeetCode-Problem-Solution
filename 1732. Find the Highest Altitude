@@ -1,0 +1,12 @@
+func largestAltitude(g []int) int {
+    a, mx := 0, 0
+
+    for _, x := range g {
+        a += x
+        if a > mx {
+            mx = a
+        }
+    }
+
+    return mx
+}
