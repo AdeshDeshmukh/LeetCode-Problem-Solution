@@ -1,0 +1,18 @@
+// Contest LC
+using ll   =  long long;
+using vi  =  vector<int>;
+using vll  =  vector<ll>;
+#define pb push_back
+#define sorta(v) sort((v).begin(), (v).end())
+#define foo(i, a, b) for (int i = (a); i < (b); ++i )
+
+
+class Solution {
+public:
+    vector<string> createGrid(int m, int n) {
+        vector<string>g(m,string(n,'#')) ;
+        foo(j,0,n) g[0][j] = '.';
+        foo(i,0,m) g[i][n-1] = '.' ;
+        return g;
+    }
+};
