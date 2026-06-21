@@ -1,0 +1,22 @@
+// Contest LC
+using ll   =  long long;
+using vi  =  vector<int>;
+using vll  =  vector<ll>;
+#define pb push_back
+#define sorta(v) sort((v).begin(), (v).end())
+#define foo(i, a, b) for (int i = (a); i < (b); ++i )
+
+
+class Solution {
+public:
+    int maxDistance(string m) {
+        ll x=0,y=0,w=0,ans=0;
+        for(auto &c : m){
+            if(c =='U') y++;
+            else if(c=='D') y--;
+            else if(c=='R') x++;
+            else if(c=='L') x--;
+            else w++ ;
+        }return abs(x)+abs(y)+w ;
+    }
+};
