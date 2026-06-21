@@ -1,0 +1,26 @@
+// Contest LC
+using ll   =  long long;
+using vi  =  vector<int>;
+using vll  =  vector<ll>;
+#define pb push_back
+#define sorta(v) sort((v).begin(), (v).end())
+#define foo(i, a, b) for (int i = (a); i < (b); ++i )
+
+
+class Solution {
+public:
+    int maxIceCream(vector<int>& cs, int co) {
+        sort(cs.begin(), cs.end());
+        int i = 0, ic = 0;
+        
+        while((co > 0) && (i < cs.size())) {
+            if(cs[i] <= co) {
+                ic++;
+                co -= cs[i];
+            }
+            i++;
+        }
+
+        return ic;
+    }
+};
