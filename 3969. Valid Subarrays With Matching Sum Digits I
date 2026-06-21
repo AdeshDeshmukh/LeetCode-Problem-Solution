@@ -1,0 +1,26 @@
+// Contest LC
+using ll   =  long long;
+using vi  =  vector<int>;
+using vll  =  vector<ll>;
+#define pb push_back
+#define sorta(v) sort((v).begin(), (v).end())
+#define foo(i, a, b) for (int i = (a); i < (b); ++i )
+
+
+class Solution {
+public:
+    int countValidSubarrays(vector<int>& n, int x) {
+        ll nn=n.size(),ans=0;
+        foo(i,0,nn){
+            ll s=0;
+            foo(r,i,nn){
+                s+= n[r] ;
+                if(s%10 ==x){
+                    ll t = s;
+                    while (t>=10) t/=10;
+                    if(t==x) ans++ ;
+                }
+            }
+        }return ans ;
+    }
+};
