@@ -1,0 +1,38 @@
+// Contest LC
+using ll   =  long long;
+using vi  =  vector<int>;
+using vll  =  vector<ll>;
+#define pb push_back
+#define sorta(v) sort((v).begin(), (v).end())
+#define foo(i, a, b) for (int i = (a); i < (b); ++i )
+
+
+class Solution {
+public:
+    int maximumLength(vector<int>& n) {
+        int count=0 , maxl=1;
+        unordered_map<long long,int> freq;
+        for(int x:n)freq[x]++;
+        for(const auto& [x,y]:freq){
+            if(x==1){
+                if(y%2==0)maxl=max(maxl,y-1);
+                else maxl=max(maxl,y);
+                continue;
+            }
+            if(y>1){
+                ll a=x;
+                int count=0;
+                while(freq.count(a)&&freq[a]>1){
+                    if(a==1){
+                        break;
+                    }
+                    count=count+2;
+                    a=a*a;
+                }
+                if(freq.count(a))count=count+1;
+                else count=count-1;
+                maxl=max(maxl,count);
+            }
+        }return maxl;     
+    }
+};
