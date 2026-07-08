@@ -1,0 +1,23 @@
+import "sort"
+
+func removeCoveredIntervals(it [][]int) int {
+	sort.Slice(it, func(i, j int) bool {
+		if it[i][0] == it[j][0] {
+			return it[i][1] > it[j][1]
+		}
+		return it[i][0] < it[j][0]
+	})
+
+	ans := len(it)
+	maxEnd := 0
+
+	for _, cur := range it {
+		if cur[1] <= maxEnd {
+			ans--
+		} else {
+			maxEnd = cur[1]
+		}
+	}
+
+	return ans
+}
