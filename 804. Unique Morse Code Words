@@ -1,0 +1,25 @@
+// Contest LC
+using ll   =  long long;
+using vi  =  vector<int>;
+using vll  =  vector<ll>;
+#define pb push_back
+#define sorta(v) sort((v).begin(), (v).end())
+#define foo(i, a, b) for (int i = (a); i < (b); ++i )
+
+
+class Solution {
+public:
+    int uniqueMorseRepresentations(vector<string>& words) {
+        vector<string> morsecodeMap={".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."};
+        unordered_set<string> ts;
+
+        for(const string& word : words){
+            string t="";
+            for(char ch : word){
+                t+=morsecodeMap[ch-'a'];
+            }
+            ts.insert(t);
+        }
+        return ts.size();
+    }
+};
