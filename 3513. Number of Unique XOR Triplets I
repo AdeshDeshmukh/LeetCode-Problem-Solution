@@ -1,0 +1,21 @@
+// Contest LC
+using ll   =  long long;
+using vi  =  vector<int>;
+using vll  =  vector<ll>;
+#define pb push_back
+#define sorta(v) sort((v).begin(), (v).end())
+#define foo(i, a, b) for (int i = (a); i < (b); ++i )
+
+
+class Solution {
+public:
+    int uniqueXorTriplets(vector<int>& n) {
+        int nn = n.size();
+        if(nn<=2) return nn;
+        int ans = 1;
+        while (ans <= nn)
+            ans <<= 1;
+
+        return ans;
+    }
+};
